@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A little corner of the internet dedicated to someone special." />
+  <title>Just Thinking of You ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fff8f6;
+      --paper: rgba(255,255,255,.78);
+      --ink: #3e3033;
+      --muted: #806d72;
+      --rose: #d77d8d;
+      --rose-dark: #ad5264;
+      --blush: #f7dce1;
+      --line: #edd3d8;
+      --shadow: 0 20px 60px rgba(116, 64, 75, .12);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(247,220,225,.65), transparent 28rem),
+        radial-gradient(circle at 90% 30%, rgba(242,226,212,.65), transparent 25rem),
+        var(--bg);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(1080px, calc(100% - 36px)); margin: auto; }
+
+    .nav {
+      position: fixed; z-index: 20; top: 16px; left: 50%;
+      transform: translateX(-50%);
+      width: min(940px, calc(100% - 28px));
+      padding: 10px 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.8);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: 0 12px 35px rgba(70, 35, 43, .08);
+    }
+    .brand { font-family: "Parisienne", cursive; font-size: 27px; padding-left: 12px; }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a { padding: 9px 13px; border-radius: 999px; font-size: 13px; color: var(--muted); }
+    .nav-links a:hover { background: var(--blush); color: var(--ink); }
+
+    section { padding: 110px 0; position: relative; }
+
+    .hero {
+      min-height: 100vh; display: grid; place-items: center; text-align: center;
+      padding-top: 150px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px;
+      color: var(--rose-dark); background: rgba(255,255,255,.5);
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    }
+    h1, h2, h3 { font-family: "Cormorant Garamond", serif; line-height: 1.05; margin: 0; }
+    h1 { font-size: clamp(4rem, 11vw, 8.2rem); font-weight: 600; margin: 20px 0; }
+    .script { font-family: "Parisienne", cursive; color: var(--rose-dark); }
+    .hero p { max-width: 590px; margin: 0 auto 30px; font-size: 18px; color: var(--muted); }
+    .cta {
+      border: 0; cursor: pointer; color: white; background: var(--rose-dark);
+      padding: 13px 21px; border-radius: 999px; box-shadow: 0 10px 25px rgba(173,82,100,.22);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(173,82,100,.28); }
+
+    .floating { position: absolute; opacity: .45; animation: float 6s ease-in-out infinite; pointer-events:none; }
+    .f1 { top: 25%; left: 8%; font-size: 34px; }
+    .f2 { top: 33%; right: 10%; font-size: 26px; animation-delay: -2s; }
+    .f3 { bottom: 17%; left: 16%; font-size: 18px; animation-delay: -4s; }
+    @keyframes float { 50% { transform: translateY(-15px) rotate(8deg); } }
+
+    .section-head { text-align: center; max-width: 650px; margin: 0 auto 48px; }
+    .section-head h2 { font-size: clamp(2.8rem, 6vw, 4.5rem); margin: 12px 0; }
+    .section-head p { color: var(--muted); }
+
+    .card {
+      background: var(--paper); border: 1px solid rgba(237,211,216,.85);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+
+    .likes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .like { padding: 28px; }
+    .like span { font-size: 25px; }
+    .like h3 { font-size: 27px; margin: 10px 0 5px; }
+    .like p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .timeline { position: relative; max-width: 900px; margin: auto; }
+    .timeline::before {
+      content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+      width: 1px; background: var(--line);
+    }
+    .moment { width: 50%; padding: 0 36px 55px 0; position: relative; }
+    .moment:nth-child(even) { margin-left: 50%; padding: 0 0 55px 36px; }
+    .dot {
+      position: absolute; top: 12px; right: -7px; width: 14px; height: 14px;
+      background: var(--bg); border: 3px solid var(--rose); border-radius: 50%;
+      box-shadow: 0 0 0 7px var(--bg);
+    }
+    .moment:nth-child(even) .dot { left: -7px; right: auto; }
+    .moment-card { padding: 23px; }
+    .level { color: var(--rose-dark); font-size: 11px; text-transform: uppercase; letter-spacing: .15em; }
+    .moment h3 { font-size: 30px; margin: 5px 0; }
+    .moment p { margin: 4px 0 17px; color: var(--muted); font-size: 14px; }
+    .comfort { font-size: 12px; font-weight: 600; display: flex; justify-content: space-between; }
+    .bar { height: 7px; border-radius: 99px; background: #f0e2e4; margin-top: 8px; overflow: hidden; }
+    .fill { height: 100%; width: var(--level); background: var(--rose); border-radius: inherit; transition: width 1.2s ease; }
+
+    .photo {
+      height: 210px; border-radius: 18px; border: 2px dashed #dcbcc3;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.8), rgba(247,220,225,.35));
+      display: grid; place-items: center; text-align: center;
+      color: #a18188; margin-bottom: 17px; overflow: hidden; position: relative;
+    }
+    .photo strong { display: block; font-family: "Cormorant Garamond", serif; font-size: 23px; }
+    .photo small { font-size: 11px; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .thinking {
+      text-align: center; padding: 55px 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(247,220,225,.55));
+    }
+    .thinking h2 { font-size: clamp(2.8rem, 7vw, 5rem); }
+    #thought { min-height: 65px; max-width: 650px; margin: 20px auto; color: var(--muted); font-size: 17px; }
+    .small { font-size: 12px; color: #a18188; }
+
+    .letter {
+      max-width: 760px; margin: auto; padding: clamp(30px, 7vw, 70px);
+      background: #fffdfc; box-shadow: var(--shadow);
+      border: 1px solid #f0dcdf; transform: rotate(-.3deg);
+    }
+    .letter h2 { font-size: 47px; margin-bottom: 25px; }
+    .letter p { color: var(--muted); }
+    .signature { text-align: right; font-family: "Parisienne", cursive; font-size: 34px; color: var(--rose-dark); margin-top: 25px; }
+
+    footer { padding: 50px 0 70px; text-align:center; color: var(--muted); font-size: 12px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      .nav-links a { display: none; }
+      .nav-links a:last-child { display: block; }
+      .brand { font-size: 24px; }
+      section { padding: 80px 0; }
+      .likes { grid-template-columns: 1fr; }
+      .timeline::before { left: 8px; }
+      .moment, .moment:nth-child(even) { width: 100%; margin: 0; padding: 0 0 35px 35px; }
+      .dot, .moment:nth-child(even) .dot { left: 1px; right: auto; }
+      .photo { height: 180px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="brand" href="#top">for Peace ♡</a>
+    <div class="nav-links">
+      <a href="#things">Things I like</a>
+      <a href="#story">Our story</a>
+      <a href="#thinking">Thinking of you</a>
+      <a href="#letter">A little note</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="floating f1">♡</div>
+      <div class="floating f2">✦</div>
+      <div class="floating f3">♡</div>
+      <div class="container reveal">
+        <div class="eyebrow">a tiny corner of the internet · just for you</div>
+        <h1>Just thinking<br><span class="script">of you.</span></h1>
+        <p>
+          I don't know exactly when you became one of my favorite people
+          to think about… but somehow, here we are.
+        </p>
+        <a class="cta" href="#things">Come a little closer ↓</a>
+      </div>
+    </section>
+
+    <section id="things">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">little things</div>
+          <h2>Things I like about you</h2>
+          <p>Not an exhaustive list. Honestly, we'd be here all day.</p>
+        </div>
+
+        <div class="likes">
+          <article class="like card reveal">
+            <span>☼</span><h3>Your smile</h3>
+            <p>The kind that makes an ordinary moment feel a little brighter.</p>
+          </article>
+          <article class="like card reveal">
+            <span>☁</span><h3>Your mind</h3>
+            <p>Beautiful place, I'm gonna rent a room just to see what goes on in there.</p>
+          </article>
+          <article class="like card reveal">
+            <span>♡</span><h3>Talking to you</h3>
+            <p>Conversations with you tend to last longer than I estimate, every time.</p>
+          </article>
+          <article class="like card reveal">
+            <span>✦</span><h3>Just… you</h3>
+            <p>There's something about you that's difficult to put into words. So I won't try too hard.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">our little timeline</div>
+          <h2>Our levels of comfort</h2>
+          <p>It only gets better and better</p>
+        </div>
+
+        <div class="timeline">
+          <article class="moment reveal">
+            <div class="dot"></div>
+            <div class="moment-card card">
+              <div class="photo">
+                <!-- Replace the placeholder with an image: -->
+                  <img src="/images/turn_n_tender.jpeg" alt="Our first meet">
+                <!-- <div><strong>📷 First meet</strong><small>Replace with your photo</small></div> -->
+              </div>
+              <span class="level">Level 01 · The beginning</span>
+              <h3>“So… there's definitely something here.”</h3>
+              <p>That was my thought process while sitting across from you at Turn n Tender. You were enjoying your steak and I was thinking "This is the end of our 'friendship', one way or another". Weird body language in the picture though lol</p>
+              <div class="comfort"><span>Comfort Level</span> <span>=></span><span>"Something's cooking here, and it ain't steak"</span></div>
+              <div class="bar"><div class="fill" style="--level:10%"></div></div> 
+            </div>
+          </article>
+
+          <article class="moment reveal">
+            <div class="dot"></div>
+            <div class="moment-card card">
+              <div class="photo">
+                <img src="/images/paradise.png" >
+                <!-- <div><strong>📷 Getting to know you</strong><small>Replace with your photo</small></div> -->
+              </div>
+              <span class="level">Level 02 · Paradise</span>
+              <h3>“Talking to you is actually easy.”</h3>
+              <p>We've created this habit of not finishing shows without side conversations, but I love it. Comfort levels definitely increased through this experience</p>
+              <div class="comfort"><span>Comfort Level</span> <span>=></span><span>"No going back now"</span></div>
+              <div class="bar"><div class="fill" style="--level:35%"></div></div> 
+            </div>
+          </article>
+
+          <article class="moment reveal">
+            <div class="dot"></div>
+            <div class="moment-card card">
+              <div class="photo">
+                <img src="/images/cinema.png" >
+                <div><strong>📷 A favorite moment</strong><small>Replace with your photo</small></div>
+              </div>
+              <span class="level">Level 03 · First Date</span>
+              <h3>“Expectations, expectations”</h3>
+              <p>I wish we took a real picture but this will have to do. I might have forgotten the movie but the date is engraved in my memory. Much better body language </p>
+              <div class="comfort"><span>Comfort Level</span> <span>=></span> <span>"We're actually doing this"</span></div>
+              <div class="bar"><div class="fill" style="--level:50%"></div></div> 
+            </div>
+          </article>
+
+          <article class="moment reveal">
+            <div class="dot"></div>
+            <div class="moment-card card">
+              <div class="photo">
+                <img src="/images/northcliff.jpeg" >
+                <div><strong>📷 One of our moments</strong><small>Replace with your photo</small></div>
+              </div>
+              <span class="level">Level 04 · Second Date</span>
+              <h3>“Views, views, what's that? more views.”</h3>
+              <p>FAVOURITE DATE SO FAR!!! Great view of Johannesburg, great conversation and games, terrible geography skills, watching the sunset, a little lip meet n greet (allegedly), dessert, what more could we ask for?</p>
+              <div class="comfort"><span>Comfort Level</span> <span>=></span><span>"This is better than last time"</span></div>
+              <div class="bar"><div class="fill" style="--level:60%"></div></div>
+            </div>
+          </article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="thinking">
+      <div class="container">
+        <div class="thinking card reveal">
+          <div class="eyebrow">a completely scientific measurement</div>
+          <h2>In case you're wondering about my thoughts and wishes...</h2>
+          <div id="thought">Press the button and find out (I suggest multiple clicks to get through the entire list)</div>
+          <button class="cta" id="thoughtBtn">Tell me ♡</button>
+          <!-- <p class="small">Spoiler: probably more than I should admit.</p> -->
+        </div>
+      </div>
+    </section>
+
+    <section id="letter">
+      <div class="container">
+        <div class="letter reveal">
+          <h2>One last thing…</h2>
+          <p>
+            You need to know that I think you're a wonderful human being
+            who's brought joy and peace (pun intended) at an interesting period in my life.
+          </p>
+          <p>
+            Somewhere along the way, you became someone
+            I genuinely enjoy having in my life, someone I look forward to calling "Babe".
+          </p>
+          <p>
+            So I made this tiny corner of the internet just to say:
+          </p>
+          <p><strong>I'm thinking about you.</strong><br>
+          And I'm really glad I met you. ♡ </strong><br>
+          And I would like to ask you something, unfortunately it has to wait until I'm back online</p>
+          <div class="signature">— me</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Made with a little too much thought ♡
+  </footer>
+
+  <script>
+    const messages = [
+      "I hope you're having a good and productive day.",
+      "I hope that the joy of the Lord fills your cup today.",
+      "I hope you know there's a guy in Rustenburg who fancies you",
+      "I hope you're smiling while reading this.",
+      "I hope you know I miss seeing you.",
+      "I hope work doesn't stress you out or tire you.",
+      "I hope you know you're appreciated.",
+      "I hope your morning devotion and prayer is refreshing and enlightening",
+      "I hope you know you can sometimes be funny (allegedly).",
+      "Sight for sore eyes, I need to start wearing glasses around you",
+      "I hope you excel at everything you do today, remembering that you can do all things through Christ who strengthens you.",
+    ];
+
+    const thought = document.getElementById("thought");
+    const button = document.getElementById("thoughtBtn");
+
+    button.addEventListener("click", () => {
+      const message = messages[Math.floor(Math.random() * messages.length)];
+      thought.animate(
+        [{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
+        { duration: 350, easing: "ease-out" }
+      );
+      thought.textContent = message;
+      button.textContent = "Again ♡";
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
